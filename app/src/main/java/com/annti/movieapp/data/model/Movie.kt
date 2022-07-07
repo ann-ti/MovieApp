@@ -3,6 +3,8 @@ package com.annti.movieapp.data.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.annti.movieapp.data.db.DataConverter
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
@@ -23,6 +25,7 @@ data class Movie(
 @Parcelize
 @JsonClass(generateAdapter = true)
 @Entity(tableName = "movies")
+@TypeConverters(DataConverter::class)
 data class Results(
     @Json(name = "poster_path")
     val posterPath: String?,
@@ -50,7 +53,9 @@ data class Results(
     @Json(name = "video")
     val video: Boolean,
     @Json(name = "vote_average")
-    val voteAverage: Double
+    val voteAverage: Double,
+    @Json(name = "genre_ids")
+    val genreIds: List<Int>
 ) : Parcelable
 
 @Parcelize

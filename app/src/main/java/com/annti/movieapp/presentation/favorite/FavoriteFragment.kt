@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -49,7 +50,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite),
         }
     }
 
-    private fun deleteAllFavoritesMovies(view: View){
+    private fun deleteAllFavoritesMovies(view: View) {
         binding.toolbar.setOnMenuItemClickListener {
             Snackbar.make(
                 view,
@@ -69,23 +70,21 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite),
         lifecycleScope.launchWhenCreated {
             viewModel.movies.collect {
                 favoriteMovieAdapter.items = it
-                if (it.isNullOrEmpty()){
-                    binding.errorText.visibility = View.VISIBLE
-                    binding.errorText.text = "Empty list"
-                }
             }
         }
 
-        viewModel.error.observe(viewLifecycleOwner) {
-            binding.errorText.text = it
+        viewModel.error.observe(viewLifecycleOwner) { errorText ->
+            binding.frameAlarmError.setText(errorText)
         }
         viewModel.errorView.observe(viewLifecycleOwner) { error ->
-            if (error) {
-                binding.errorText.visibility = View.VISIBLE
-            } else {
-                binding.errorText.visibility = View.GONE
-            }
+            binding.frameAlarmError.setImage(R.drawable.ic_big_heart)
+            showError(error)
         }
+    }
+
+    private fun showError(show: Boolean) {
+        binding.favoriteListMovie.isVisible = !show
+        binding.frameAlarmError.isVisible = show
     }
 
     override fun onItemSelected(item: Results) {

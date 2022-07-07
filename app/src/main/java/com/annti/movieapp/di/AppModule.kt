@@ -12,6 +12,7 @@ import com.annti.movieapp.domain.MovieUseCase
 import com.annti.movieapp.domain.MovieUseCaseImpl
 import com.annti.movieapp.presentation.favorite.FavoriteMovieViewModel
 import com.annti.movieapp.presentation.movie.MovieViewModel
+import com.annti.movieapp.presentation.search.SearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -71,6 +72,12 @@ val appModule = module {
 
     viewModel {
         MovieViewModel(
+            movieUseCase = get()
+        )
+    }
+
+    viewModel {
+        SearchViewModel(
             movieUseCase = get()
         )
     }

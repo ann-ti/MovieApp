@@ -1,7 +1,6 @@
 package com.annti.movieapp.presentation.details
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.annti.movieapp.R
 import com.annti.movieapp.databinding.FragmentDetailsBinding
-import com.annti.movieapp.di.API_KEY
 import com.annti.movieapp.presentation.details.adapter.GenresAdapter
 import com.annti.movieapp.presentation.favorite.FavoriteMovieViewModel
 import com.annti.movieapp.presentation.movie.MovieViewModel

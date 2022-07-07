@@ -13,4 +13,10 @@
         android:contentDescription="FavoriteFragment"
         android:icon="@drawable/ic_heart"/>
 
+    <item
+        android:id="@+id/searchFragment"
+        android:title="Search"
+        android:contentDescription="FavoriteFragment"
+        android:icon="@drawable/ic_search"/>
+
 </menu>

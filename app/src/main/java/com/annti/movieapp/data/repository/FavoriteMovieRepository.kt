@@ -2,14 +2,13 @@ package com.annti.movieapp.data.repository
 
 import com.annti.movieapp.data.db.Database
 import com.annti.movieapp.data.model.Results
-import com.annti.movieapp.data.network.handleNetworkErrors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 interface FavoriteMovieRepository {
     suspend fun saveMovie(movie: Results)
-    fun getFavorites(): Flow<List<Results>>
+    fun getFavoriteMovies(): Flow<List<Results>>
     suspend fun removeMovie(movie: Results)
     suspend fun getMovie(movieId: Int): Results?
     suspend fun removeAllMovies()
@@ -25,7 +24,7 @@ class FavoriteMovieRepositoryImpl : FavoriteMovieRepository {
         }
     }
 
-    override fun getFavorites(): Flow<List<Results>> =
+    override fun getFavoriteMovies(): Flow<List<Results>> =
         favoriteMovieDao.getFavorites()
 
     override suspend fun removeMovie(movie: Results) {

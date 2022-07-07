@@ -27,11 +27,9 @@
                 android:id="@+id/txtTitleMovie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_marginEnd="17dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif"
                 android:text="Название фильма"
                 android:textColor="@color/black"
@@ -41,43 +39,50 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtDescriptionMovie"
+                android:id="@+id/txtGenreMovie"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="8dp"
-                android:textSize="14sp"
-                android:maxLines="4"
-                android:ellipsize="end"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewCalendar"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="Genre"
+                android:textColor="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePosterMovie"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitleMovie"
-                tools:text="@tools:sample/lorem/random" />
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate" />
 
             <ImageView
-                android:id="@+id/imageViewCalendar"
+                android:id="@+id/imgStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
-                android:layout_marginBottom="12dp"
-                android:src="@drawable/ic_calendar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imagePosterMovie" />
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintStart_toEndOf="@+id/imagePosterMovie"
+                app:layout_constraintTop_toBottomOf="@+id/txtGenreMovie" />
+
+            <TextView
+                android:id="@+id/txtPopularity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Popularity"
+                app:layout_constraintBottom_toBottomOf="@+id/imgStar"
+                app:layout_constraintStart_toEndOf="@+id/imgStar"
+                app:layout_constraintTop_toTopOf="@+id/imgStar"/>
 
             <TextView
                 android:id="@+id/txtReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif"
-                android:text="1 января 2017"
+                android:text="1/01/2017"
+                android:textColor="#004FFF"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewCalendar" />
+                app:layout_constraintStart_toEndOf="@+id/imagePosterMovie"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleMovie" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

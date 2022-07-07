@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.annti.movieapp.R
 import com.annti.movieapp.databinding.FragmentMovieBinding
 import com.annti.movieapp.data.model.Results
+import com.annti.movieapp.presentation.details.DetailsFragmentArgs
+import com.annti.movieapp.presentation.favorite.FavoriteMovieViewModel
 import com.annti.movieapp.presentation.movie.adapter.MovieAdapter
 import com.annti.movieapp.presentation.movie.adapter.MovieAdapterDelegate
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,25 +36,9 @@ class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapterDelegate.It
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.error.observe(viewLifecycleOwner) {
-            binding.txtError.text = it
-        }
-        viewModel.errorView.observe(viewLifecycleOwner) { error ->
-            if (error) {
-                binding.frameAlarmError.visibility = View.VISIBLE
-            } else binding.frameAlarmError.visibility = View.GONE
-        }
-        viewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else binding.progressBar.visibility = View.GONE
-        }
-
         getMovieList()
         setRecyclerViewListMovie()
-        search()
     }
-
 
     private fun setRecyclerViewListMovie() {
         with(binding.listMovie) {
@@ -67,36 +54,30 @@ class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapterDelegate.It
         viewModel.movieList.observe(viewLifecycleOwner) {
             movieAdapter.items = it
         }
+        viewModel.errorView.observe(viewLifecycleOwner) { error ->
+            showError(error)
+        }
+        viewModel.loading.observe(viewLifecycleOwner) { progress ->
+            showProgress(progress)
+        }
+        viewModel.error.observe(viewLifecycleOwner){ errorText ->
+            binding.frameAlarmError.setText(errorText)
+        }
     }
 
-    private fun search() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.searchView.clearFocus()
-                viewModel.searchMovie(query!!)
-                binding.searchView.setQuery("", false)
-                return false
-            }
+    private fun showProgress(progress: Boolean) {
+        binding.progressBar.isVisible = progress
+        binding.listMovie.isVisible = !progress
+    }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-        viewModel.errorView.observe(viewLifecycleOwner) { error ->
-            if (error) {
-                binding.imageView2.setImageResource(R.drawable.ic_big_search)
-                binding.frameAlarmError.visibility = View.VISIBLE
-                binding.listMovie.visibility = View.GONE
-            } else {
-                binding.frameAlarmError.visibility = View.GONE
-                binding.listMovie.visibility = View.VISIBLE
-            }
-        }
+    //TODO разобраться с видимостью списка
+    private fun showError(show: Boolean) {
+        binding.listMovie.isVisible = !show
+        binding.frameAlarmError.isVisible = show
     }
 
     override fun onItemSelected(item: Results) {
         val action = MovieFragmentDirections.actionMovieFragmentToDetailsFragment(item)
         findNavController().navigate(action)
     }
-
 }

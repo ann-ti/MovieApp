@@ -9,7 +9,7 @@ interface MovieUseCase {
     suspend fun discoverMovie(): Movie
     suspend fun getMovieList(): List<Results>
     suspend fun getMovie(movieId: Int): MovieDetails
-    suspend fun searchMovie(query: String): Movie
+    suspend fun searchMovie(query: String): List<Results>
 }
 
 class MovieUseCaseImpl(
@@ -24,6 +24,6 @@ class MovieUseCaseImpl(
     override suspend fun getMovie(movieId: Int): MovieDetails =
         movieRepository.getMovie(movieId, apiKey)
 
-    override suspend fun searchMovie(query: String): Movie =
+    override suspend fun searchMovie(query: String): List<Results> =
         movieRepository.searchMovie(apiKey, query)
 }

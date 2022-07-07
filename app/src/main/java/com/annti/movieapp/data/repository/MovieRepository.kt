@@ -10,7 +10,7 @@ interface MovieRepository {
     suspend fun discoverMovie(apiKey: String): Movie
     suspend fun getMovieList(apiKey: String): List<Results>
     suspend fun getMovie(movieId: Int, apiKey: String): MovieDetails
-    suspend fun searchMovie(apiKey: String, query: String): Movie
+    suspend fun searchMovie(apiKey: String, query: String): List<Results>
 }
 
 class MovieRepositoryImpl(
@@ -29,8 +29,9 @@ class MovieRepositoryImpl(
             movieApi.getMovie(movieId, apiKey)
         }
 
-    override suspend fun searchMovie(apiKey: String, query: String): Movie = handleNetworkErrors {
-        movieApi.searchMovie(apiKey, query)
-    }
+    override suspend fun searchMovie(apiKey: String, query: String): List<Results> =
+        handleNetworkErrors {
+            movieApi.searchMovie(apiKey, query).results
+        }
 
 }

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteMovieUseCase {
     suspend fun saveMovie(movie: Results)
-    fun getFavorites(): Flow<List<Results>>
+    fun getFavoriteMovies(): Flow<List<Results>>
     suspend fun removeMovie(movie: Results)
     suspend fun getMovieId(movieId: Int): Results?
     suspend fun removeAllMovies()
@@ -20,8 +20,8 @@ class FavoriteMovieUseCaseImpl(
         favoriteMovieRepository.saveMovie(movie)
     }
 
-    override fun getFavorites(): Flow<List<Results>> =
-        favoriteMovieRepository.getFavorites()
+    override fun getFavoriteMovies(): Flow<List<Results>> =
+        favoriteMovieRepository.getFavoriteMovies()
 
     override suspend fun removeMovie(movie: Results) {
         favoriteMovieRepository.removeMovie(movie)

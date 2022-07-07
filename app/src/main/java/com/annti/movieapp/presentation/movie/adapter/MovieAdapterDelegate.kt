@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.annti.movieapp.R
+import com.annti.movieapp.data.model.GenreName
 import com.annti.movieapp.databinding.ItemMovieBinding
 import com.annti.movieapp.data.model.Results
 import com.annti.movieapp.utils.dateFormat
@@ -46,7 +47,7 @@ class MovieAdapterDelegate(private val itemSelected: ItemSelected) :
                 itemSelected.onItemSelected(movie)
             }
             binding.txtTitleMovie.text = movie.title
-            binding.txtDescriptionMovie.text = movie.overview
+            binding.txtPopularity.text = movie.voteAverage.toString()
             binding.txtReleaseDate.text = "${dateFormat(movie.releaseDate)}"
             Glide.with(itemView)
                 .load(
@@ -54,6 +55,13 @@ class MovieAdapterDelegate(private val itemSelected: ItemSelected) :
                 )
                 .placeholder(R.drawable.movie_placeholder)
                 .into(binding.imagePosterMovie)
+
+            val genreList = movie.genreIds.map { id ->
+                GenreName.values().find {
+                    it.genre_id == id
+                }
+            }
+            binding.txtGenreMovie.text = genreList.joinToString()
         }
     }
 

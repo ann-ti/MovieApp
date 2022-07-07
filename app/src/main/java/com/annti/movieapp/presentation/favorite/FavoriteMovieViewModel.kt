@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.annti.movieapp.data.model.Results
 import com.annti.movieapp.domain.FavoriteMovieUseCase
 import com.hadilq.liveevent.LiveEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -33,9 +32,13 @@ class FavoriteMovieViewModel(
         get() = loadingLiveData
 
     fun getFavorites() {
-        favMovieUseCase.getFavorites()
+        favMovieUseCase.getFavoriteMovies()
             .onEach {
                 moviesMutableState.value = it
+                if (it.isNullOrEmpty()){
+                    errorData.postValue("Еще нет избранных фильмов")
+                    errorViewData.postValue(true)
+                }
             }
             .launchIn(viewModelScope)
     }

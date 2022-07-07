@@ -1,7 +1,6 @@
 package com.annti.movieapp.data.db
 
 import androidx.room.*
-import com.annti.movieapp.data.model.Movie
 import com.annti.movieapp.data.model.Results
 import kotlinx.coroutines.flow.Flow
 

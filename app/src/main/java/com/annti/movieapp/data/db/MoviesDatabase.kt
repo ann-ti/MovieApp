@@ -2,7 +2,6 @@ package com.annti.movieapp.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.annti.movieapp.data.model.Movie
 import com.annti.movieapp.data.model.Results
 
 @Database(
@@ -16,6 +15,6 @@ abstract class MoviesDatabase : RoomDatabase() {
 
     companion object {
         const val DB_VERSION = 1
-        const val DB_MAME = "main_database"
+        const val DB_MAME = "movie_database"
     }
 }

@@ -19,7 +19,7 @@ fun dateFormat(oldStringDate: String?): String? {
     if (oldStringDate == null || oldStringDate == "")
         return ""
     val newDate: String?
-    val dateFormat = SimpleDateFormat("d MMMM yyyy", Locale(getCountry()))
+    val dateFormat = SimpleDateFormat("d/MM/yyyy", Locale(getCountry()))
     newDate = try {
         val date: Date = SimpleDateFormat("yyyy-MM-dd").parse(oldStringDate)
         dateFormat.format(date)
