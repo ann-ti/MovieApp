@@ -37,6 +37,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), MovieAdapterDelegate.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.searchView.queryHint = "Поиск по названию фильма"
 
         search()
         setRecyclerViewListMovie()
